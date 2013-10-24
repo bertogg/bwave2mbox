@@ -1,0 +1,24 @@
+bwave2mbox.pl converts BlueWave packet files to e-mail in mbox format.
+
+BlueWave was a popular FidoNet mail reader. Its mail packets were ZIP
+archives that contained several data files. Here's a complete
+description of the BlueWave format:
+
+   http://webtweakers.com/swag/MAIL/0023.PAS.html
+
+bwave2mbox.pl can process an arbitrary number of BlueWave packets and
+will write the results to any given directory, one mailbox per mail
+area. This program will not overwrite existing mailboxes, any new
+messages will simply be added after the previous ones.
+
+This program will not attempt to detect the character set used in the
+messages, it's assumed to be CP437 but you can change the default in
+the script.
+
+Usage example:
+
+  $ bwave2mbox.pl ~/fidonet/bwave/down/bbs.* ~/fidonet/out
+
+Have fun,
+
+Alberto
