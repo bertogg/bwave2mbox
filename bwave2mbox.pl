@@ -22,10 +22,11 @@ use Fcntl qw(SEEK_SET SEEK_CUR);
 use MIME::Base64;
 use MIME::QuotedPrint;
 use Date::Parse;
-use POSIX qw(strftime);
+use POSIX qw(strftime setlocale LC_TIME);
 
 # Some variables that you might want to change
 # $ENV{TZ} = 'Europe/Madrid';
+setlocale (LC_TIME, 'C');
 my $charset = 'cp437';
 my $unzip = '/usr/bin/unzip';
 
