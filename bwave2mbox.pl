@@ -94,7 +94,8 @@ sub encode_header {
 # Remove MSGID header and fix newline characters.
 sub fix_body {
     my $body = shift;
-    $body =~ s/^\x20\x01MSGID:(.*?)\x0d//;
+    $body =~ s/[\x0a\x20]\x01((FLAGS|MSGID|NOTE|PID|REPLY|Received):|FMPT)(.*?)\x0d//g;
+    $body =~ s/^\x20(.*?\x0d*[^\x20])/$1/;
     $body =~ s/\x0a//g;
     $body =~ s/\x0d/\n/g;
     return $body;
