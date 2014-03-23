@@ -112,6 +112,7 @@ sub read_areas {
         my ($name, $descr);
         sysread (INPUT, $name, 21);
         sysread (INPUT, $descr, 50);
+        $number =~ s/\0//g;
         $name =~ s/\0//g;
         $descr =~ s/\0//g;
         $area_name{$number} = lc($name);
@@ -130,6 +131,7 @@ sub read_offsets {
     binmode (INPUT);
     while (sysread (INPUT, $area, 6)) {
         my ($nmsgs, $offset);
+        $area =~ s/\0//g;
         sysread (INPUT, $nmsgs, 2);
         sysseek (INPUT, 2, SEEK_CUR);
         sysread (INPUT, $offset, 4);
@@ -192,7 +194,7 @@ sub read_messages {
 # Write all messages to mbox files
 sub write_messages {
     my $dir = shift;
-    foreach my $areanumber (keys(%num_msgs)) {
+    foreach my $areanumber (sort(keys(%num_msgs))) {
         my $areaname = $area_name{$areanumber};
         my $filename = "$dir/$areaname";
         open (OUTFILE, ">>$filename");
