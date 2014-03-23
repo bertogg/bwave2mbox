@@ -204,6 +204,7 @@ sub write_messages {
             my %message = %{$_};
             my $date = strftime("%a, %d %b %Y %H:%M:%S %z", localtime($message{date}));
             my $fromdate = strftime("%a %b %d %H:%M:%S %Y", localtime($message{date}));
+            my $msglen = length($message{body}) + 1;
             print OUTFILE <<EOF
 From localhost ${fromdate}
 From: $message{sender} <fidonet\@localhost>
@@ -216,6 +217,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=${charset}
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+Content-Length: $msglen
 
 $message{body}
 
