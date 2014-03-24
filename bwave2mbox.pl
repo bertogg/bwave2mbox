@@ -229,7 +229,7 @@ MIME-Version: 1.0
 Content-Type: text/plain; charset=${charset}
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Content-Length: $msglen
+Content-Length: ${msglen}
 
 $message{body}
 
