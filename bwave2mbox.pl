@@ -30,6 +30,13 @@ setlocale (LC_TIME, 'C');
 my $charset = 'cp437';
 my $unzip = '/usr/bin/unzip';
 
+# The 0x8d byte is supposed to be a "soft" carriage return,
+# but it can also be a (grave) accented "i" in CP437.
+# "yes"  -> treat it always as a carriage return
+# "no"   -> treat it always as an accented i
+# "auto" -> try to detect the meaning in each case
+my $handle_soft_cr = "yes";
+
 my %area_name;
 my %area_descr;
 my %msg_offset;
@@ -98,6 +105,11 @@ sub fix_body {
     $body =~ s/^\x20(.*?\x0d*[^\x20])/$1/;
     $body =~ s/\x0a//g;
     $body =~ s/\x0d/\n/g;
+    if ($handle_soft_cr eq "yes") {
+        $body =~ s/\x8d/\n/g;
+    } elsif ($handle_soft_cr eq "auto") {
+        $body =~ s/([^\n]{70}.*?)\x8d/$1\n/g;
+    }
     return $body;
 }
 
