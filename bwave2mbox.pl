@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 
-# bwave2mbox.pl v0.1 - A BlueWave to mbox converter
-# Author: Alberto Garcia <berto@igalia.com>, 2013
+# bwave2mbox.pl v1.1 - A BlueWave to mbox converter
+# Author: Alberto Garcia <berto@igalia.com>, 2013, 2014
 # BlueWave format description: http://webtweakers.com/swag/MAIL/0023.PAS.html
 
 # This program is free software: you can redistribute it and/or modify
